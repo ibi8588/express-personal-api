@@ -4,26 +4,139 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Blank</title>
+    <title>Zen GM API</title>
 
     <!-- STYLESHEETS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/styles/styles.css">
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- VENDOR SCRIPTS -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
   </head>
   <body>
-    <div class="container">
+
+  <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h1>Under Construction</h1>
+          <h1>Baseball Players</h1>
           <h4><a href="/api">Read My API Documentation</a></h4>
         </div>
       </div>
     </div>
+
+    <!--Create New Player form starts below-->
+  <form id="createNewPlayer" name="createNewPlayer" action="http://api/players:id" method="POST"> <!--Enter action for form-->
+    <fieldset>
+    <legend>Create New Player</legend>
+    <label>Player Name:</label>
+        <input type="text" name="name"><br>
+    <label>Years Played:</label>
+        <input type="number" name="yearsPlayed"><br>
+    <label>Team:</label>
+        <select name="team" id="team">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="13">22</option>
+            <option value="14">23</option>
+            <option value="15">24</option>
+            <option value="16">25</option>
+            <option value="17">26</option>
+            <option value="18">27</option>
+            <option value="19">28</option>
+            <option value="20">29</option>
+            <option value="21">30</option>
+        </select>
+    <br>
+    <label>Image URL:</label>
+        <input type="url" name="imageURL"><br>
+    <label>Position:</label>
+         <select name="position" id="position">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+         </select>
+    <br>
+    <label> World Series Wins:</label>
+        <input type="number" name="worldSeriesWins"><br>
+    <label>MVP:</label>
+        <input type="number" name="mvp"><br>
+    <label>Statistics:</label>
+        <input type="url" name="statistics"><br>
+
+    <button onclick="validate()" type="submit" value="Submit">Submit</button>
+    </fieldset>
+    </form>
+
+    <!--Search API form starts below-->
+  <form id="searchAPI" name="searchAPI" action="#" method="get" > <!--Enter action for form-->
+    Search API:
+    <input type="search" name="search" id="search">
+    <input type="submit" name="submit" id="submit">
+    </form>
+
+    <table id="playerInformation">
+  <tbody>
+    <tr>
+      <td rowspan="7"> <img id="imageURL" src="http://placehold.it/400x300" alt="Player" height="400" width="300"> </td>
+      <td>Player Name:</td>
+      <td>name="name"</td>
+    </tr>
+    <tr>
+      <td>Years Played:</td>
+       <td>name="yearsPlayed"&nbsp;</td>
+    </tr>
+    <tr>
+      <td>Team:</td>
+      <td>name="team"&nbsp;</td>
+    </tr>
+    <tr>
+      <td>Position:</td>
+      <td>name="position"&nbsp;</td>
+    </tr>
+    <tr>
+      <td>World Series Wins:</td>
+      <td>name="worldSeriesWins"&nbsp;</td>
+    </tr>
+    <tr>
+      <td>MVP:</td>
+      <td>name="mvp"&nbsp;</td>
+    </tr>
+    <tr>
+      <td>Statistics:</td>
+      <td>name="statistics"&nbsp;</td>
+      <div id="playerTarget">
+    </tr>
+  </tbody>
+</table>
+</div>
+
   </body>
 </html>
