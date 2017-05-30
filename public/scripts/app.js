@@ -15,52 +15,64 @@ $(document).ready(function() {
 
 });
 
-function loadPlayers(json) {console.log(json)
-  for(i = 0; i < json.length; i++){
+function loadPlayers(json) {
+  console.log(json)
+  for (i = 0; i < json.length; i++) {
     $('#playerTarget').append(
 
       `<table id="playerInformation">
   <tbody>
     <tr>
-      <td rowspan="7"> <img id="imageURL" src="${json.imgURL}" alt="Player" height="400" width="300"> </td>
+      <td rowspan="7"> <img id="imageURL" src=${json[i].imgURL} alt="Player" height="400" width="300"> </td>
       <td>Player Name:</td>
-      <td>${json.name}</td>
+      <td>${json[i].name}</td>
     </tr>
     <tr>
       <td>Years Played:</td>
-       <td>${json.yearsPlayed}</td>
+       <td>${json[i].yearsPlayed}</td>
     </tr>
     <tr>
       <td>Team:</td>
-      <td>${json.team}</td>
+      <td>${json[i].team}</td>
     </tr>
     <tr>
       <td>Position:</td>
-      <td>${json.position}</td>
+      <td>${json[i].position}</td>
     </tr>
     <tr>
       <td>World Series Wins:</td>
-      <td>${json.worldSeriesWins}</td>
+      <td>${json[i].worldSeriesWins}</td>
     </tr>
     <tr>
       <td>MVP:</td>
-      <td>${json.mvp}</td>
+      <td>${json[i].mvp}</td>
     </tr>
     <tr>
       <td>Statistics:</td>
-      <td>${json.statistics}</td>
+      <td>${json[i].statistics}</td>
     </tr>
     <tr>
        <td colspan="3"><button>Delete Player</button></td>
    </tr>
   </tbody>
 </table>`
-)
+    )
   }
 }
 
-function playerError(e){
-  console.log('error.')
+$('#createNewPlayer').on('submit', function(e){
+  e.preventDefault();
+  $.ajax({
+    method: 'POST',
+    url: '/api/players',
+    data: $(this).serialize(),
+    success: newPlayerSuccess,
+    error: newPlayerError
+  })
+})
+
+function playerError(e) {
+  console.log('load player error.')
 }
 
 function validate() {
