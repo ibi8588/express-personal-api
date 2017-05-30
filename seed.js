@@ -115,3 +115,11 @@ var players_list = [
     stats: "http://baseball.zengm.com/l/2/player/2187"
   }
 ];
+
+// db.Players.remove({}, function removedPlayers(){
+//
+//   db.Players.create(player_data), function displayPlayers(err, players){
+//     if (err){ return console.log(err); }
+//     console.log('Created players')
+//   }
+// })

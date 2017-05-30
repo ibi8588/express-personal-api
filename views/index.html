@@ -36,7 +36,7 @@
     <label>Player Name:</label>
         <input type="text" name="name"><br>
     <label>Years Played:</label>
-        <input type="number" name="yearsPlayed"><br>
+        <input type="number" name="yearsPlayed" min="0" max="35"><br>
     <label>Team:</label>
         <select name="team" id="team">
             <option value="1">Atlanta Gold Club</option>
@@ -64,11 +64,11 @@
             <option value="23">San Diego Pandas</option>
             <option value="24">San Francisco Venture Capitalists</option>
             <option value="25">Seattle Symphony</option>
-            <option value="17">St. Louis Spirits</option>
-            <option value="18">Tampa Turtles</option>
-            <option value="19">Toronto Beavers</option>
-            <option value="20">Vancouver Whalers</option>
-            <option value="21">Washington Monuments</option>
+            <option value="26">St. Louis Spirits</option>
+            <option value="27">Tampa Turtles</option>
+            <option value="28">Toronto Beavers</option>
+            <option value="29">Vancouver Whalers</option>
+            <option value="30">Washington Monuments</option>
         </select>
     <br>
     <label>Image URL:</label>
@@ -87,60 +87,15 @@
          </select>
     <br>
     <label> World Series Wins:</label>
-        <input type="number" name="worldSeriesWins"><br>
+        <input type="number" name="worldSeriesWins" min="0" max="20"><br>
     <label>MVP:</label>
-        <input type="number" name="mvp"><br>
+        <input type="number" name="mvp" min="0" max="10"><br>
     <label>Statistics:</label>
         <input type="url" name="stats"><br>
 
     <button onclick="validate()" type="submit" value="Submit">Submit</button>
     </fieldset>
     </form>
-
-    <!--Search API form starts below-->
-  <form id="searchAPI" name="searchAPI" action="#" method="GET" > <!--Enter action for form-->
-    Search API:
-    <input type="search" name="search" id="search">
-    <input type="submit" value="Search" name="submit" id="submit">
-    </form>
-
-    <table id="playerInformation">
-  <tbody>
-    <tr>
-      <td rowspan="7"> <img id="imageURL" src="http://placehold.it/400x300" alt="Player" height="400" width="300"> </td>
-      <td>Player Name:</td>
-      <td>name="name"</td>
-    </tr>
-    <tr>
-      <td>Years Played:</td>
-       <td>name="yearsPlayed"&nbsp;</td>
-    </tr>
-    <tr>
-      <td>Team:</td>
-      <td>name="team"&nbsp;</td>
-    </tr>
-    <tr>
-      <td>Position:</td>
-      <td>name="position"&nbsp;</td>
-    </tr>
-    <tr>
-      <td>World Series Wins:</td>
-      <td>name="worldSeriesWins"&nbsp;</td>
-    </tr>
-    <tr>
-      <td>MVP:</td>
-      <td>name="mvp"&nbsp;</td>
-    </tr>
-    <tr>
-      <td>Statistics:</td>
-      <td>name="stats"&nbsp;</td>
-    </tr>
-    <tr>
-       <td colspan="2"><button>Delete Player</button></td>
-       <td><button>Edit Data</button></td>
-   </tr>
-  </tbody>
-</table>
 <div id="playerTarget">
 </div>
 

@@ -34,9 +34,6 @@ app.use(express.static('public'));
  */
 
 
-app.get('/', function homepage(req, res) {
-  res.sendFile(__dirname + '/views/index.html');
-});
 //player list for server test.
 var players_list = [
   {
@@ -53,7 +50,7 @@ var players_list = [
     name: "Donald Barney",
     yearsPlayed: 17,
     team: "San Francisco Venture Capitalists",
-    imgURL: "",
+    imgURL: "http://l1.yimg.com/bt/api/res/1.2/iJWkGNnmmn3M3pxxSjdbqg/YXBwaWQ9eW5ld3NfbGVnbztpbD1wbGFuZTtxPTc1O3c9NjAw/http://media.zenfs.com/en/person/Ysports/giancarlo-stanton-baseball-headshot-photo.jpg",
     position: "C",
     worldSeriesWins: 14,
     mvp: 5,
@@ -63,7 +60,7 @@ var players_list = [
     name: "Billy Brown",
     yearsPlayed: 17,
     team: "Miami Cyclones",
-    imgURL: "",
+    imgURL: "https://s-media-cache-ak0.pinimg.com/736x/dc/f6/c2/dcf6c2fcf38826fb0da8c62e89977841.jpg",
     position: "LF",
     worldSeriesWins: 0,
     mvp: 0,
@@ -73,7 +70,7 @@ var players_list = [
     name: "Craig Rodriguez",
     yearsPlayed: 16,
     team: "Phoenix Vultures",
-    imgURL: "",
+    imgURL: "https://www.outsidepitchmlb.com/wp-content/uploads/2013/08/michael-morse-baseball-headshot-photo.jpg",
     position: "1B",
     worldSeriesWins: 0,
     mvp: 0,
@@ -83,7 +80,7 @@ var players_list = [
     name: "Matthew Christopher",
     yearsPlayed: 16,
     team: "Chicago Whirlwinds",
-    imgURL: "",
+    imgURL: "http://bloximages.newyork1.vip.townnews.com/stltoday.com/content/tncms/assets/v3/editorial/b/44/b447b4d5-8a66-5198-98f0-0ed800f4cfe2/b447b4d5-8a66-5198-98f0-0ed800f4cfe2.image.jpg",
     position: "1B",
     worldSeriesWins: 0,
     mvp: 1,
@@ -93,7 +90,7 @@ var players_list = [
     name: "Jesse Hamilton",
     yearsPlayed: 14,
     team: "Phoenix Vultures",
-    imgURL: "",
+    imgURL: "http://offenburger.com/wp-content/uploads/wppa/329.jpg?ver=1",
     position: "3B",
     worldSeriesWins: 0,
     mvp: 0,
@@ -103,7 +100,7 @@ var players_list = [
     name: "Dwight Kerr",
     yearsPlayed: 15,
     team: "Houston Apollos",
-    imgURL: "",
+    imgURL: "http://d29m18w01sxjzp.cloudfront.net/sports/mlb/headshots/e1633ff9-8c46-4698-9bea-3eecd478fa94v2.jpg",
     position: "3B",
     worldSeriesWins: 1,
     mvp: 0,
@@ -113,7 +110,7 @@ var players_list = [
     name: "Richard Evans",
     yearsPlayed: 17,
     team: "San Francisco Venture Capitalists",
-    imgURL: "",
+    imgURL: "http://ww1.hdnux.com/photos/52/44/67/11161032/5/920x920.jpg",
     position: "1B",
     worldSeriesWins: 4,
     mvp: 1,
@@ -123,7 +120,7 @@ var players_list = [
     name: "Jason Janes",
     yearsPlayed: 11,
     team: "Phoenix Vultures",
-    imgURL: "",
+    imgURL: "http://d3k2oh6evki4b7.cloudfront.net/req/201704071/images/headshots/9/9f4721ab_mlbam.jpg",
     position: "1B",
     worldSeriesWins: 0,
     mvp: 3,
@@ -133,7 +130,7 @@ var players_list = [
     name: "Alan Fleck",
     yearsPlayed: 16,
     team: "San Francisco Venture Capitalists",
-    imgURL: "",
+    imgURL: "http://l1.yimg.com/bt/api/res/1.2/staXcnk8lOjulxGUPHpang/YXBwaWQ9eW5ld3NfbGVnbztpbD1wbGFuZTtxPTc1O3c9NjAw/http://media.zenfs.com/en/person/Ysports/prince-fielder-baseball-headshot-photo.jpg",
     position: "LF",
     worldSeriesWins: 10,
     mvp: 0,
@@ -143,7 +140,7 @@ var players_list = [
     name: "Jacob Sabatini",
     yearsPlayed: 14,
     team: "San Francisco Venture Capitalists",
-    imgURL: "",
+    imgURL: "https://upload.wikimedia.org/wikipedia/commons/6/68/Steven_Wright_1994.jpg",
     position: "LF",
     worldSeriesWins: 14,
     mvp: 0,
@@ -154,13 +151,16 @@ var players_list = [
 /*
  * JSON API Endpoints
  */
+ app.get('/', function homepage(req, res) {
+   res.sendFile(__dirname + '/views/index.html');
+ });
 
 app.get('/api', function apiIndex(req, res) {
   // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
   // It would be seriously overkill to save any of this to your database.
   // But you should change almost every line of this response.
   res.json({
-    message: "Welcome to my personal api! Here's what you need to know!",
+    message: "Routes for my personal api",
     documentationUrl: "https://github.com/ibi8588/express-personal-api/blob/master/README.md", // github readme
     baseUrl: "https://protected-retreat-76331.herokuapp.com/", // heroku page
     endpoints: [
@@ -188,6 +188,16 @@ app.get('/api/profile', function profile(req, res) {
 //index of players.
 app.get('/api/players', function(req, res){
   res.json(players_list);
+});
+
+app.get('/api/players', function (req, res) {
+  db.Players.find(function (err, players){
+    if (err) {
+      console.log("index error: " + err);
+      res.sendStatus(500);
+    }
+    res.json(players);
+  });
 });
 
 //create a player.

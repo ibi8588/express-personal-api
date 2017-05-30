@@ -1,4 +1,3 @@
-console.log("Sanity Check: JS is working!");
 let allPlayers = [];
 
 
@@ -14,14 +13,13 @@ $(document).ready(function() {
 });
 
 function loadPlayers(json) {
-  console.log(json)
   for (i = 0; i < json.length; i++) {
     $('#playerTarget').append(
 
       `<table id="playerInformation">
   <tbody>
     <tr>
-      <td rowspan="7"> <img id="imageURL" src=${json[i] .imgURL} alt="Player" height="400" width="300"> </td>
+      <td rowspan="7"> <img id="imageURL" src=${json[i] .imgURL} alt="Player" title="No picture" height="400" width="300"> </td>
       <td>Player Name:</td>
       <td>${json[i].name}&nbsp;</td>
     </tr>
@@ -50,8 +48,8 @@ function loadPlayers(json) {
       <td><a href=${json[i].stats}&nbsp;>${json[i].stats}</a></td>
     </tr>
     <tr>
-    <td colspan="2"><button>Delete Player</button></td>
-    <td><button>Edit Data</button></td>
+    <td colspan="2"><button id="delete">Delete Player</button></td>
+    <td><button id="edit">Edit Data</button></td>
    </tr>
   </tbody>
 </table>`
@@ -59,7 +57,7 @@ function loadPlayers(json) {
   }
 }
 
-$('#createNewPlayer').on('submit', function(e){
+$('#createNewPlayer').on('submit', function(e) {
   e.preventDefault();
   $.ajax({
     method: 'POST',
@@ -70,14 +68,67 @@ $('#createNewPlayer').on('submit', function(e){
   })
 })
 
-function newPlayerSuccess(json){
-  
+$('#delete').on('click', function() {
+  $.ajax({
+    method: 'DELETE',
+    url: 'api/players/' + $(this).attr(''),
+    success: deletePlayer,
+    error: deleteError
+  });
+});
+
+$('#edit').on('click', function(){
+  event.preventDefault();
+  var playerId = $(this).closest('#playerInformation').attr('player-id');
+
+     // find the player to update by its id
+     var playerUpdate = allPlayers.filter(function (player) {
+       return Player._id == playerId;
+     })[0];
+
+     // serialze form data
+     var updatedPlayer = $(this).serialize();
+$.ajax({
+       type: 'PUT',
+       url: '/api/players' + '/' + playerId,
+       data: updatedPlayer,
+       success: function(data) {
+         // replace todo to update with newly updated version (data)
+         allPlayer.splice(allPlayers.indexOf(updatedPlayer), 1, data);
+
+         // render all todos to view
+         render();
+       }
+     });
+   })
+
+function deletePlayer(json) {
+  let player = json;
+  let playerId = player.__id;
+  for (var i = 0; i < allBooks.length; i++) {
+    if (allPlayers[i]._id === playerId) {
+      allPlayers.splice(i, 1);
+      break; // we found our book - no reason to keep searching (this is why we didn't use forEach)
+    }
+  }
+  render();
+}
+
+function deleteError() {
+  console.log('delete player error.')
+}
+
+function newPlayerSuccess(json) {
+  $('#createNewPlayer input').val('');
+  allPlayers.push(json);
+  render();
 }
 
 function playerError(e) {
   console.log('load player error.')
 }
 
+//validate the information put into the form to create a player.
 function validate() {
   function errorMessage() {
     alert("Must create valid entry.");

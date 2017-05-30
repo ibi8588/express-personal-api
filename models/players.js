@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var playerSchema = new Schema({
+var playerSchema = new mongoose.Schema({
   name: String,
   yearsPlayed: Number,
   team: String,
