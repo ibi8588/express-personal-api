@@ -1,3 +1,4 @@
+//array to store players.
 let allPlayers = [];
 
 
@@ -12,6 +13,7 @@ $(document).ready(function() {
 
 });
 
+//load player data onto index page.
 function loadPlayers(json) {
   for (i = 0; i < json.length; i++) {
     $('#playerTarget').append(
@@ -57,6 +59,7 @@ function loadPlayers(json) {
   }
 }
 
+//create player ajaz call
 $('#createNewPlayer').on('submit', function(e) {
   e.preventDefault();
   $.ajax({
@@ -68,6 +71,7 @@ $('#createNewPlayer').on('submit', function(e) {
   })
 })
 
+//delete player ajax call
 $('#delete').on('click', function() {
   $.ajax({
     method: 'DELETE',
@@ -77,53 +81,57 @@ $('#delete').on('click', function() {
   });
 });
 
-$('#edit').on('click', function(){
+$('#edit').on('click', function() {
   event.preventDefault();
   var playerId = $(this).closest('#playerInformation').attr('player-id');
 
-     // find the player to update by its id
-     var playerUpdate = allPlayers.filter(function (player) {
-       return Player._id == playerId;
-     })[0];
+  // find the player to update by its id
+  var playerUpdate = allPlayers.filter(function(player) {
+    return Player._id == playerId;
+  })[0];
 
-     // serialze form data
-     var updatedPlayer = $(this).serialize();
-$.ajax({
-       type: 'PUT',
-       url: '/api/players' + '/' + playerId,
-       data: updatedPlayer,
-       success: function(data) {
-         // replace todo to update with newly updated version (data)
-         allPlayer.splice(allPlayers.indexOf(updatedPlayer), 1, data);
+  // serialze form data
+  var updatedPlayer = $(this).serialize();
+  $.ajax({
+    type: 'PUT',
+    url: '/api/players' + '/' + playerId,
+    data: updatedPlayer,
+    success: function(data) {
+      // replace player to update with newly updated version (data)
+      allPlayer.splice(allPlayers.indexOf(updatedPlayer), 1, data);
 
-         // render all todos to view
-         render();
-       }
-     });
-   })
+      // render all players to view
+      render();
+    }
+  });
+})
 
+//delete player function
 function deletePlayer(json) {
   let player = json;
   let playerId = player.__id;
   for (var i = 0; i < allBooks.length; i++) {
     if (allPlayers[i]._id === playerId) {
       allPlayers.splice(i, 1);
-      break; // we found our book - no reason to keep searching (this is why we didn't use forEach)
+      break;
     }
   }
   render();
 }
 
+//delete player error message
 function deleteError() {
   console.log('delete player error.')
 }
 
+//create new player function
 function newPlayerSuccess(json) {
   $('#createNewPlayer input').val('');
   allPlayers.push(json);
   render();
 }
 
+//error message for creating a player.
 function playerError(e) {
   console.log('load player error.')
 }

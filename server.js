@@ -165,7 +165,7 @@ app.get('/api', function apiIndex(req, res) {
     baseUrl: "https://protected-retreat-76331.herokuapp.com/", // heroku page
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      // {method: "GET", path: "/api/profile", description: "Data about me"}, // links to portfolio page
+      {method: "GET", path: "/api/profile", description: "Data about me"}, // links to portfolio page
       {method: "GET", path: "/api/players", description: "Index of all baseball players"}, // Gets all baseball players
       {method: "POST", path: "/api/players/:id", description: "create a baseball player"},
       {method: "PUT", path: "/api/players/:id", description: "edit a player"},
@@ -173,6 +173,7 @@ app.get('/api', function apiIndex(req, res) {
     ]
   })
 });
+//profile page.
 app.get('/api/profile', function profile(req, res) {
   res.json({
     name: "Ibrahim Aldridge",
@@ -188,16 +189,6 @@ app.get('/api/profile', function profile(req, res) {
 //index of players.
 app.get('/api/players', function(req, res){
   res.json(players_list);
-});
-
-app.get('/api/players', function (req, res) {
-  db.Players.find(function (err, players){
-    if (err) {
-      console.log("index error: " + err);
-      res.sendStatus(500);
-    }
-    res.json(players);
-  });
 });
 
 //create a player.

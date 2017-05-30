@@ -1,4 +1,5 @@
 body {
+  background-image: url("http://wallpaper-gallery.net/images/wallpaper-wood/wallpaper-wood-25.jpg");
   color: black;
   font-family: Helvetica, Arial, sans-serif;
   background-color: white;
@@ -12,6 +13,7 @@ h1 {
   text-align: center;
 }
 table{
+    background-color: whitesmoke;
     width: auto;
     height: auto;
     border-style: groove;
