@@ -18,7 +18,7 @@ var players_list = [
     name: "Donald Barney",
     yearsPlayed: 17,
     team: "San Francisco Venture Capitalists",
-    imgURL: "http://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/28963.png&w=350&h=254",
+    imgURL: "",
     position: "C",
     worldSeriesWins: 14,
     mvp: 5,

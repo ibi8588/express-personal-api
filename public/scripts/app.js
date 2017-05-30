@@ -1,7 +1,5 @@
 console.log("Sanity Check: JS is working!");
-// var express = require('express')
-// var app = express();
-// var bodyParser = require('body-parser');
+let allPlayers = [];
 
 
 $(document).ready(function() {
@@ -71,6 +69,10 @@ $('#createNewPlayer').on('submit', function(e){
     error: newPlayerError
   })
 })
+
+function newPlayerSuccess(json){
+  
+}
 
 function playerError(e) {
   console.log('load player error.')

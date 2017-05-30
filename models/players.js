@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-Schema = mongoose.Schema;
+var Schema = mongoose.Schema;
 
 var playerSchema = new Schema({
   name: String,
@@ -14,4 +14,4 @@ var playerSchema = new Schema({
 
 var Player = mongoose.model('Player', playerSchema);
 
-module.export = Player;
+module.exports = Player;

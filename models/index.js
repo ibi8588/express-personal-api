@@ -2,4 +2,6 @@ var mongoose = require("mongoose");
 mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost/personal-api");
 
 
-module.exports.Book = require("./players");
+module.exports.Player = require("./players");
+
+console.log("database")

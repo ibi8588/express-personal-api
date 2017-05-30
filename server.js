@@ -1,11 +1,11 @@
 // require express and other modules
-var express = require('express'),
-    app = express();
-
+var express = require("express");
+var app = express();
+var db = require("./models")
 // parse incoming urlencoded form data
 // and populate the req.body object
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
+var bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: true}));
 
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
@@ -33,6 +33,7 @@ app.use(express.static('public'));
  * HTML Endpoints
  */
 
+
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
@@ -52,7 +53,7 @@ var players_list = [
     name: "Donald Barney",
     yearsPlayed: 17,
     team: "San Francisco Venture Capitalists",
-    imgURL: "http://a.espncdn.com/combiner/i?img=/i/headshots/mlb/players/full/28963.png&w=350&h=254",
+    imgURL: "",
     position: "C",
     worldSeriesWins: 14,
     mvp: 5,
@@ -159,7 +160,6 @@ app.get('/api', function apiIndex(req, res) {
   // It would be seriously overkill to save any of this to your database.
   // But you should change almost every line of this response.
   res.json({
-    // woopsIForgotToDocumentAllMyEndpoints: true, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
     documentationUrl: "https://github.com/ibi8588/express-personal-api/blob/master/README.md", // github readme
     baseUrl: "https://protected-retreat-76331.herokuapp.com/", // heroku page
@@ -173,11 +173,24 @@ app.get('/api', function apiIndex(req, res) {
     ]
   })
 });
+app.get('/api/profile', function profile(req, res) {
+  res.json({
+    name: "Ibrahim Aldridge",
+    githubUsername: "ibi8588",
+    githubLink: "https://github.com/ibi8588",
+    githubProfileImage: "https://lh3.googleusercontent.com/-yDMMcpIxaMQ/AAAAAAAAAAI/AAAAAAAAHbw/RCCjxJLrSz4/s640/photo.jpg",
+    personalSiteLink: "http://www.ibrahimaldridge.com",
+    currentCity: "Oakland, CA",
+    pets: [{name: "Sally", type: "Dog", breed: "Golden Retriever"}, {name: "Billy", type: "Lizard", breed: "Wild"}]
+  })
+})
 
+//index of players.
 app.get('/api/players', function(req, res){
   res.json(players_list);
 });
 
+//create a player.
 app.post('/api/players/:id', function(req, res){
   var newPlayer = new db.Player({
     name: req.body.name,
@@ -198,6 +211,7 @@ app.post('/api/players/:id', function(req, res){
   });
 });
 
+//delete a player.
 app.delete('/api/players/:id', function(req, res){
   var playerId = req.params.id;
   db.Player.findOneAndRemove({ __id: playerId}, function(err, foundPlayer){
@@ -205,6 +219,7 @@ app.delete('/api/players/:id', function(req, res){
   });
 });
 
+//update a player.
 app.put('/api/players/:id', function update(req, res){
   var playerId = req.params.id;
 
@@ -225,6 +240,7 @@ app.put('/api/players/:id', function update(req, res){
     }
   });
 });
+
 
 
 /**********
