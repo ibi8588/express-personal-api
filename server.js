@@ -66,7 +66,7 @@ var players_list = [
     position: "LF",
     worldSeriesWins: 0,
     mvp: 0,
-    stats: "http://baseball.zengm.com/l/2/player/2281"
+    stats: "http://baseball.zengm.com/l/2/player/7273"
   },
   {
     name: "Craig Rodriguez",
