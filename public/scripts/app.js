@@ -5,9 +5,7 @@ console.log("Sanity Check: JS is working!");
 
 
 $(document).ready(function() {
-  //var $playerlist
   $.ajax({
-    //$playerlist = $('#playerTarget'),
     method: 'GET',
     url: '/api/players',
     success: loadPlayers,
@@ -17,40 +15,48 @@ $(document).ready(function() {
 
 });
 
-function loadPlayers(json) {
-  $('#playerTarget').append(`<tbody>
+function loadPlayers(json) {console.log(json)
+  for(i = 0; i < json.length; i++){
+    $('#playerTarget').append(
+
+      `<table id="playerInformation">
+  <tbody>
     <tr>
-      <td rowspan="7"> <img id="imageURL" src="http://placehold.it/400x300" alt="Player" height="400" width="300"> </td>
+      <td rowspan="7"> <img id="imageURL" src="${json.imgURL}" alt="Player" height="400" width="300"> </td>
       <td>Player Name:</td>
-      <td>name="name"</td>
+      <td>${json.name}</td>
     </tr>
     <tr>
       <td>Years Played:</td>
-       <td>name="yearsPlayed"&nbsp;</td>
+       <td>${json.yearsPlayed}</td>
     </tr>
     <tr>
       <td>Team:</td>
-      <td>name="team"&nbsp;</td>
+      <td>${json.team}</td>
     </tr>
     <tr>
       <td>Position:</td>
-      <td>name="position"&nbsp;</td>
+      <td>${json.position}</td>
     </tr>
     <tr>
       <td>World Series Wins:</td>
-      <td>name="worldSeriesWins"&nbsp;</td>
+      <td>${json.worldSeriesWins}</td>
     </tr>
     <tr>
       <td>MVP:</td>
-      <td>name="mvp"&nbsp;</td>
+      <td>${json.mvp}</td>
     </tr>
     <tr>
       <td>Statistics:</td>
-      <td>name="statistics"&nbsp;</td>
-      <div id="playerTarget">
+      <td>${json.statistics}</td>
     </tr>
-  </tbody>`)
-
+    <tr>
+       <td colspan="3"><button>Delete Player</button></td>
+   </tr>
+  </tbody>
+</table>`
+)
+  }
 }
 
 function playerError(e){
@@ -94,5 +100,6 @@ function validate() {
   if (document.createNewPlayer.statistics.value = "") {
     errorMessage();
     return false;
-  }
+  };
+  return true
 }

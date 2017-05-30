@@ -9,12 +9,14 @@
     <!-- STYLESHEETS -->
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="/styles/styles.css">
 
     <!-- VENDOR SCRIPTS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
+
   </head>
   <body>
 
@@ -28,7 +30,7 @@
     </div>
 
     <!--Create New Player form starts below-->
-  <form id="createNewPlayer" name="createNewPlayer" action="http://api/players:id" method="POST"> <!--Enter action for form-->
+  <form id="createNewPlayer" name="createNewPlayer" action="http://api/players:id" method="POST" onsubmit="return (validate());"> <!--Enter action for form-->
     <fieldset>
     <legend>Create New Player</legend>
     <label>Player Name:</label>
@@ -58,10 +60,10 @@
             <option value="19">19</option>
             <option value="20">20</option>
             <option value="21">21</option>
-            <option value="13">22</option>
-            <option value="14">23</option>
-            <option value="15">24</option>
-            <option value="16">25</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
             <option value="17">26</option>
             <option value="18">27</option>
             <option value="19">28</option>
@@ -96,7 +98,7 @@
     </form>
 
     <!--Search API form starts below-->
-  <form id="searchAPI" name="searchAPI" action="#" method="get" > <!--Enter action for form-->
+  <form id="searchAPI" name="searchAPI" action="#" method="GET" > <!--Enter action for form-->
     Search API:
     <input type="search" name="search" id="search">
     <input type="submit" name="submit" id="submit">
@@ -132,10 +134,13 @@
     <tr>
       <td>Statistics:</td>
       <td>name="statistics"&nbsp;</td>
-      <div id="playerTarget">
     </tr>
+    <tr>
+       <td colspan="3"><button>Delete Player</button></td>
+   </tr>
   </tbody>
 </table>
+<div id="playerTarget">
 </div>
 
   </body>

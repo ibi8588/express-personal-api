@@ -165,7 +165,7 @@ app.get('/api', function apiIndex(req, res) {
     baseUrl: "https://protected-retreat-76331.herokuapp.com/", // heroku page
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // links to portfolio page
+      // {method: "GET", path: "/api/profile", description: "Data about me"}, // links to portfolio page
       {method: "GET", path: "/api/players", description: "Index of all baseball players"}, // Gets all baseball players
       {method: "POST", path: "/api/players/:id", description: "create a baseball player"},
       {method: "PUT", path: "/api/players/:id", description: "edit a player"},
@@ -175,8 +175,57 @@ app.get('/api', function apiIndex(req, res) {
 });
 
 app.get('/api/players', function(req, res){
-  res.json(players_list)
+  res.json(players_list);
 });
+
+app.post('/api/players/:id', function(req, res){
+  var newPlayer = new db.Player({
+    name: req.body.name,
+    yearsPlayed: req.body.yearsPlayed,
+    team: req.body.team,
+    imgURL: req.body.imgURL,
+    position: req.body.position,
+    worldSeriesWins: req.body.worldSeriesWins,
+    mvp: req.body.mvp,
+    stats: req.body.stats
+  });
+  newPlayer.save(function(err, player){
+    if (err){
+      return console.log("create error " + err);
+    }
+    console.log("created ", + player.name)
+    res.json(player);
+  });
+});
+
+app.delete('/api/players/:id', function(req, res){
+  var playerId = req.params.id;
+  db.Player.findOneAndRemove({ __id: playerId}, function(err, foundPlayer){
+    res.json(foundPlayer)
+  });
+});
+
+app.put('/api/players/:id', function update(req, res){
+  var playerId = req.params.id;
+
+  db.Player.findOne({ __id: playerId }, function(err, foundPlayer){
+    if (err) {
+      res.status(500).json({errod: err.message})
+    } else {
+      foundPlayer.player = req.body.player;
+      foundPlayer.description = req.body.description;
+
+      foundPlayer.save(function(err, savedPlayer){
+        if(err) {
+          res.status(500).json({ error: err.message });
+        } else {
+          res.json(savedPlayer);
+        }
+      });
+    }
+  });
+});
+
 
 /**********
  * SERVER *
