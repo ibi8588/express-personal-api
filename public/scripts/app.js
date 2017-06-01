@@ -21,7 +21,7 @@ function loadPlayers(json) {
       `<table id="playerInformation">
   <tbody>
     <tr>
-      <td rowspan="7"> <img id="imageURL" src=${json[i] .imgURL} alt="Player" title="No picture" height="400" width="300"> </td>
+      <td rowspan="7"> <img id="imageURL" src=${json[i].imgURL} alt="Player" title="No picture" height="400" width="300"> </td>
       <td>Player Name:</td>
       <td>${json[i].name}&nbsp;</td>
     </tr>
